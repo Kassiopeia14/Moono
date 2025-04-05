@@ -1,4 +1,7 @@
 <Project Sdk="Uno.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\modMnemosyneJSONModels\modMnemosyneJSONModels.csproj" />
+  </ItemGroup>
   <PropertyGroup>
     <!--<TargetFrameworks>net9.0-windows10.0.26100;net9.0-desktop</TargetFrameworks>-->
     <TargetFramework>net9.0-desktop</TargetFramework>
