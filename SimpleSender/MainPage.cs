@@ -1,47 +1,51 @@
 using System.Text;
 using System.Text.Json;
+using System.Threading.Tasks;
 using modMnemosyneJSONModels;
+using Windows.Networking.Sockets;
 
 namespace SimpleSender;
 
-internal partial record Countable(int Count, int Step)
+internal partial record Messager(
+    string Sender
+)
 {
-    public Countable Increment() => this with
-    {
-        Count = Count + Step
-    };
-}
+    public string Receiver { get; set;}
+    public string MessageText { get; set;}
 
-internal partial record MainModel
-{
-    public IState<Countable> Countable => State.Value(this, () => new Countable(0, 1));
+    string serviceUri = "http://localhost:6729";
 
-    public async ValueTask IncrementSimpleSender()
+    public async Task SendMessage()
     {
         HttpClient httpClient = new HttpClient();
-        
-        string 
-            sender = "SENDER",
-            receiver = "RECEIVER",
-            serviceUri = "http://localhost:6729";
 
-        Random random = new Random();
+        httpClient.DefaultRequestHeaders.Add("Sender", $"{Sender}");
+        httpClient.DefaultRequestHeaders.Add("Receiver", $"{Receiver}");
 
-        MessageItem message = new MessageItem
+        MessageItem message = new MessageItem()
         {
-            Text = "BUBA" + random.Next(0, 100).ToString()
+            Text = MessageText
         };
-
-        httpClient.DefaultRequestHeaders.Add("Sender", $"{sender}");
-        httpClient.DefaultRequestHeaders.Add("Receiver", $"{receiver}");
 
         string jsonString = JsonSerializer.Serialize(message);
         
         HttpContent httpContent = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
         HttpResponseMessage result = await httpClient.PostAsync(serviceUri + "/api/Message", httpContent);
+    }
+}
 
-        await Countable.UpdateAsync(c => c?.Increment());
+internal partial record MainModel
+{    
+    public IState<Messager> Messager => State.Value(this, () => new Messager("moosender"));
+
+    public async ValueTask Send()
+    {
+        var current = await Messager.Value();
+        if (current is not null)
+        {
+            await current.SendMessage();
+        }
     }
 }
 
@@ -65,19 +69,24 @@ public sealed partial class MainPage : Page
                     .Margin(12)
                     .HorizontalAlignment(HorizontalAlignment.Center)
                     .TextAlignment(Microsoft.UI.Xaml.TextAlignment.Center)
-                    .Text(() => vm.Countable.Count, txt => $"SimpleSender: {txt}"),
+                    .Text(() => vm.Messager.Sender, txt => $"Your username: {txt}"),
                 new TextBox()
                     .Margin(12)
                     .HorizontalAlignment(HorizontalAlignment.Center)
                     .TextAlignment(Microsoft.UI.Xaml.TextAlignment.Center)
-                    .PlaceholderText("Step Size")
-                    .Text(x => x.Binding(() => vm.Countable.Step).TwoWay()),
+                    .PlaceholderText("Receiver username")
+                    .Text(x => x.Binding(() => vm.Messager.Receiver).TwoWay()),
+                new TextBox()
+                    .Margin(12)
+                    .HorizontalAlignment(HorizontalAlignment.Center)
+                    .TextAlignment(Microsoft.UI.Xaml.TextAlignment.Center)
+                    .PlaceholderText("Type your message")
+                    .Text(x => x.Binding(() => vm.Messager.MessageText).TwoWay()),
                 new Button()
                     .Margin(12)
                     .HorizontalAlignment(HorizontalAlignment.Center)
-                    .Command(() => vm.IncrementSimpleSender)
+                    .Command(() => vm.Send)
                     .Content("Send")
-
             )));
 
     }
