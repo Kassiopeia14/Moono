@@ -1,6 +1,6 @@
 using UIKit;
 
-namespace Counter.iOS;
+namespace SimpleSender.iOS;
 
 public class EntryPoint
 {

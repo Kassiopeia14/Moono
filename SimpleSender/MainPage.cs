@@ -2,7 +2,7 @@ using System.Text;
 using System.Text.Json;
 using modMnemosyneJSONModels;
 
-namespace Counter;
+namespace SimpleSender;
 
 internal partial record Countable(int Count, int Step)
 {
@@ -16,7 +16,7 @@ internal partial record MainModel
 {
     public IState<Countable> Countable => State.Value(this, () => new Countable(0, 1));
 
-    public async ValueTask IncrementCounter()
+    public async ValueTask IncrementSimpleSender()
     {
         HttpClient httpClient = new HttpClient();
         
@@ -65,7 +65,7 @@ public sealed partial class MainPage : Page
                     .Margin(12)
                     .HorizontalAlignment(HorizontalAlignment.Center)
                     .TextAlignment(Microsoft.UI.Xaml.TextAlignment.Center)
-                    .Text(() => vm.Countable.Count, txt => $"Counter: {txt}"),
+                    .Text(() => vm.Countable.Count, txt => $"SimpleSender: {txt}"),
                 new TextBox()
                     .Margin(12)
                     .HorizontalAlignment(HorizontalAlignment.Center)
@@ -75,7 +75,7 @@ public sealed partial class MainPage : Page
                 new Button()
                     .Margin(12)
                     .HorizontalAlignment(HorizontalAlignment.Center)
-                    .Command(() => vm.IncrementCounter)
+                    .Command(() => vm.IncrementSimpleSender)
                     .Content("Send")
 
             )));

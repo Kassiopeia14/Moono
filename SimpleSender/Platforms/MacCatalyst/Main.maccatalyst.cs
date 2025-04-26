@@ -1,6 +1,6 @@
 using UIKit;
 
-namespace Counter.MacCatalyst;
+namespace SimpleSender.MacCatalyst;
 
 public class EntryPoint
 {

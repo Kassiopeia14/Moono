@@ -1,9 +1,9 @@
 {
   "background_color": "#ffffff",
-  "description": "Counter",
+  "description": "SimpleSender",
   "display": "standalone",
-  "name": "Counter",
-  "short_name": "Counter",
+  "name": "SimpleSender",
+  "short_name": "SimpleSender",
   "start_url": "/index.html",
   "theme_color": "#ffffff",
   "scope": "/"

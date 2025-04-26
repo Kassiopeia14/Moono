@@ -10,16 +10,16 @@
     <UnoSingleProject>true</UnoSingleProject>
 
     <!-- Display name -->
-    <ApplicationTitle>Counter</ApplicationTitle>
+    <ApplicationTitle>SimpleSender</ApplicationTitle>
     <!-- App Identifier -->
-    <ApplicationId>com.companyname.counter</ApplicationId>
+    <ApplicationId>com.companyname.SimpleSender</ApplicationId>
     <!-- Versions -->
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
     <ApplicationVersion>1</ApplicationVersion>
     <!-- Package Publisher -->
-    <ApplicationPublisher>Counter</ApplicationPublisher>
+    <ApplicationPublisher>SimpleSender</ApplicationPublisher>
     <!-- Package Description -->
-    <Description>Counter powered by Uno Platform.</Description>
+    <Description>SimpleSender powered by Uno Platform.</Description>
     <UnoFeatures>
       CSharpMarkup;
       MVUX;

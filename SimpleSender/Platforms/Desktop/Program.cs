@@ -1,6 +1,6 @@
 using Uno.UI.Runtime.Skia;
 
-namespace Counter;
+namespace SimpleSender;
 
 public class Program
 {

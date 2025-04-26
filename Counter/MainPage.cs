@@ -51,6 +51,5 @@ public sealed partial class MainPage : Page
                     .Content("Increment Counter by Step Size")
 
             )));
-
     }
 }

@@ -4,7 +4,7 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 
-namespace Counter.Droid;
+namespace SimpleSender.Droid;
 
 [Activity(
     MainLauncher = true,

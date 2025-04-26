@@ -1,4 +1,4 @@
-namespace Counter;
+namespace SimpleSender;
 
 public class Program
 {

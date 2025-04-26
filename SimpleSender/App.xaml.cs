@@ -2,7 +2,7 @@ using System;
 using Microsoft.Extensions.Logging;
 using Uno.Resizetizer;
 
-namespace Counter;
+namespace SimpleSender;
 
 public partial class App : Application
 {
