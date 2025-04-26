@@ -1,0 +1,10 @@
+{
+  "background_color": "#ffffff",
+  "description": "SignalRUno",
+  "display": "standalone",
+  "name": "SignalRUno",
+  "short_name": "SignalRUno",
+  "start_url": "/index.html",
+  "theme_color": "#ffffff",
+  "scope": "/"
+}
